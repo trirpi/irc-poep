@@ -23,6 +23,7 @@ or
 * fortune, oh-fortuna, meester, oke-is-goed
 * oke
 * sorry, ikdeedietsverkeerd, ikbeneenoliebol, iklijkzelfookopeenblobvis
+* help
 
 ###Admin Commands
 
