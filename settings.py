@@ -1,0 +1,9 @@
+channel = "##hackenkunjeleren"
+server = "irc.freenode.net"
+nickname = "poep"
+admin = ["trirpi"]
+control_char = ':'
+port = 6667
+karma_file = "controllers/dict.p"
+fortune_file = "controllers/fortunes"
+banned = []
