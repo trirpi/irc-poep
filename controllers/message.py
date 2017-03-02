@@ -99,7 +99,11 @@ def oke(arg, person):
 
 
 def sorry(arg, person):
-    return arg + ": sorry, m'love"
+    return person + ": sorry, m'love"
+
+
+def help(arg, person):
+    return "https://github.com/trirpi/irc-poep/blob/master/README.md"
 
 
 callbacks = [
@@ -114,8 +118,9 @@ callbacks = [
     (["eight", "eightball", "yesorno", "jaofnee"], eightball),
     (["fortune", "oh-fortuna", "meester", "oke-is-goed"], fortune),
     (["ban", "verwijder", "tering", "stommerik", "gaweg"], ban),
-    (["oke", oke]),
-    (["sorry", "ikdeedietsverkeerd", "ikbeneenoliebol", "iklijkzelfookopeenblobvis"], sorry)
+    (["oke"], oke),
+    (["sorry", "ikdeedietsverkeerd", "ikbeneenoliebol", "iklijkzelfookopeenblobvis"], sorry),
+    (["help"], help)
 ]
 
 
