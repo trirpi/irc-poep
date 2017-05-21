@@ -33,7 +33,7 @@ class Poep(irc.IRCClient):
         greetings = ["faka %s", "jow %s", "%s: join the club makker", "hadieho %s", "hola %s"]
         self.msg(channel, random.choice(greetings) % user)
 
-    def privmsg(self, user, channel, msg):
+    def privmsg(self, user, channel, msg, color=None):
         """This will get called when the bot receives a message."""
         user = user.split('!', 1)[0]
 
@@ -41,7 +41,7 @@ class Poep(irc.IRCClient):
         if channel == self.nickname:
             print("[*] info: received a private message: " + msg)
             msg = "Wat zit je nu weer te ratelen. Gooi het in de groep!"
-            self.msg(user, msg)
+            self.msg(user, irc.assembleFormattedText(irc.attributes.normal[irc.attributes.fg.magenta[msg]]))
 
         # Otherwise check to see if it is a message directed at me
         elif msg.startswith(settings.control_char) or msg.endswith(settings.nickname):
