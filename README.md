@@ -1,9 +1,9 @@
-#Poep
+# Poep
 
 Poep is a very cool IRC bot.
 Made with <3 by trirpi
 
-##Synopsis
+## Synopsis
 
     <@user> [command] [arguments] poep
 
@@ -11,7 +11,7 @@ or
 
     <@user> :[command] [arguments]
 
-##Commands
+## Commands
 
 * dankjewel, tnx, dankje, dankuwel, danku, thanks, thnx
 * urban, ud
@@ -25,17 +25,17 @@ or
 * sorry, ikdeedietsverkeerd, ikbeneenoliebol, iklijkzelfookopeenblobvis
 * help
 
-###Admin Commands
+### Admin Commands
 
 * ban, verwijder, tering, stommerik, gaweg
 * flikker, rot, optyfen, optiefen
 * dis, naai, vermorzel
 
-##Examples
+## Examples
 
     13:37 < trirpi> oke poep
     13:37 < poep> is goed
 
-##Awards
+## Awards
 
 <img src="http://i.imgur.com/j0S5wuc.png">

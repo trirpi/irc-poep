@@ -1,34 +1,32 @@
-import pickle
+from controllers.orm.models import Karma
+from controllers.orm import session
 
 
-class KarmaController(object):
+def get_karma(word):
+    item = session.query(Karma).filter_by(word=word).first()
+    return "karma van " + word + " is " + str(item.score)
 
-    def __init__(self, karma_file):
-        self.karma_file = karma_file
-        self.karma_dict = pickle.load(open(karma_file, 'rb'))
 
-    def save_karma(self):
-        pickle.dump(self.karma_dict, open(self.karma_file, 'wb'))
+def add_karma_item(word):
+    item = session.query(Karma).filter_by(word=word).first()
+    if not item:
+        new_word = Karma(word=word, score=0)
+        session.add(new_word)
+        session.commit()
+        return word + " added"
+    else:
+        return word + "allready in dict"
 
-    def get_karma(self, word):
-        return "karma van " + word + " is " + str(self.karma_dict[word])
 
-    def add_karma_item(self, word):
-        if word not in self.karma_dict:  # if the word does not exist
-            self.karma_dict[word] = 0
-            self.save_karma()
-            return word + " added"
-        else:
-            return word + "allready in dict"
+def increment_karma(word, username):
+    item = session.query(Karma).filter_by(word=word).first()
+    item.plus_karma()
+    item.last_vote = username
+    return "karma van " + word + " is nu " + str(item.score)
 
-    def increment_karma(self, word):
-        old_karma = self.karma_dict[word]
-        self.karma_dict[word] = old_karma + 1
-        self.save_karma()
-        return "karma van " + word + " is nu " + str(old_karma + 1)
 
-    def decrement_karma(self, word):
-        old_karma = self.karma_dict[word]
-        self.karma_dict[word] = old_karma - 1
-        self.save_karma()
-        return "karma van " + word + " is nu " + str(old_karma - 1)
+def decrement_karma(word, username):
+    item = session.query(Karma).filter_by(word=word).first()
+    item.min_karma()
+    item.last_vote = username
+    return "karma van " + word + " is nu " + str(item.score)

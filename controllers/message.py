@@ -1,12 +1,12 @@
 import random
 import requests
 import sys
+from bs4 import BeautifulSoup
 
 import settings
 
-from controllers.karma import KarmaController
+from controllers import karma
 
-control_karma = KarmaController(settings.karma_file)
 
 insulting_sentences = [
     "you triggered bro!?",
@@ -29,7 +29,6 @@ eightball_sentences = [
     "vraag het aan Sling",
     "hoe moet ik dat weten, verdomme"
 ]
-
 
 
 def dis(arg, user):
@@ -57,22 +56,25 @@ def urban_dict(arg, person):
 
 
 def increment_karma(arg, person):
-        control_karma.add_karma_item(arg)
-        return control_karma.increment_karma(arg)
+        karma.add_karma_item(arg)
+        return karma.increment_karma(arg, person)
 
 
 def decrement_karma(arg, person):
-    control_karma.add_karma_item(arg)
-    return control_karma.decrement_karma(arg)
+    karma.add_karma_item(arg)
+    return karma.decrement_karma(arg, person)
 
 
 def get_karma(arg, person):
-    control_karma.add_karma_item(arg)
-    return control_karma.get_karma(arg)
+    karma.add_karma_item(arg)
+    return karma.get_karma(arg)
 
 
 def love(arg, person):
-    return "there is " + str(random.randint(0, 100)) + "% love between " + person + " and " + arg + "."
+    if len(arg) > 1:
+        return "there is " + str(random.randint(0, 100)) + "% love between " + person + " and " + arg + "."
+    else:
+        return "Ben je lang ofzo? Van wie wil je de liefde weten?"
 
 
 def eightball(arg, person):
@@ -106,6 +108,19 @@ def help(arg, person):
     return "https://github.com/trirpi/irc-poep/blob/master/README.md"
 
 
+def peen(arg, person):
+    url = "http://metapeen.nl"
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "lxml")
+    for rang, user in enumerate(soup.find_all("tr")):
+        try:
+            if arg == user.contents[5].contents[0]:
+                score = user.contents[3].contents[0].contents[0]
+                return arg + " staat op plaats #" + str(rang) + " met " + score + " punten"
+        except IndexError:
+            pass
+    return arg + " niet gevonden"
+
 callbacks = [
     (["dis", "naai", "vermorzel"], dis),
     (["dankjewel", "tnx", "dankje", "dankuwel", "danku", "thanks", "thnx"], bedank),
@@ -120,7 +135,8 @@ callbacks = [
     (["ban", "verwijder", "tering", "stommerik", "gaweg"], ban),
     (["oke"], oke),
     (["sorry", "ikdeedietsverkeerd", "ikbeneenoliebol", "iklijkzelfookopeenblobvis"], sorry),
-    (["help"], help)
+    (["help"], help),
+    (["peen", "metapeen"], peen)
 ]
 
 
