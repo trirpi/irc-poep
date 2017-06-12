@@ -1,3 +1,4 @@
 requests
 twisted
 sqlalchemy
+bs4
