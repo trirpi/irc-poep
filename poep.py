@@ -4,7 +4,9 @@ import settings
 import controllers.message
 
 from twisted.words.protocols import irc
-from twisted.internet import reactor, protocol
+from twisted.internet import reactor, protocol, task
+
+needs_to_stop = 0
 
 
 class Poep(irc.IRCClient):
@@ -89,7 +91,6 @@ class LogBotFactory(protocol.ClientFactory):
     def clientConnectionFailed(self, connector, reason):
         print("[*] info: connection failed: ", reason)
         reactor.stop()
-
 
 if __name__ == '__main__':
     # create factory protocol and application

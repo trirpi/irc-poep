@@ -1,6 +1,6 @@
 import random
 import requests
-import sys
+import os
 from bs4 import BeautifulSoup
 
 import settings
@@ -44,9 +44,9 @@ def bedank(arg, person):
     return person + ": graag gedaan"
 
 
-def quit(arg, person):
+def quit_bot(arg, person):
     if person in settings.admin:
-        sys.exit()
+        os._exit(1)
     else:
         return "Jij bent geen admin!"
 
