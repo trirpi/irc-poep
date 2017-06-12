@@ -39,6 +39,8 @@ def dis(arg, user):
 
 
 def bedank(arg, person):
+    if arg:
+        return "%s wil je graag bedanken %s" % (person, arg)
     return person + ": graag gedaan"
 
 
@@ -123,7 +125,7 @@ def peen(arg, person):
 
 callbacks = [
     (["dis", "naai", "vermorzel"], dis),
-    (["dankjewel", "tnx", "dankje", "dankuwel", "danku", "thanks", "thnx"], bedank),
+    (["dankjewel", "tnx", "dankje", "dankuwel", "danku", "thanks", "thnx", "bedankt", "bedank"], bedank),
     (["flikker", "rot", "optyfen", "optiefen"], quit),
     (["urban", "ud"], urban_dict),
     (["plus", "++"], increment_karma),
