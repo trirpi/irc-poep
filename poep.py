@@ -1,7 +1,6 @@
 import random
 import settings
 
-from password import password
 import controllers.message
 
 from twisted.words.protocols import irc
@@ -25,8 +24,12 @@ class Poep(irc.IRCClient):
         """Called when bot has succesfully signed on to server."""
         self.join(self.factory.channel)
         print("[*] info: successfully signed on to server")
-        self.msg('nickserv', 'identify ' + password)
-        print("[*] info: requested nick " + settings.nickname)
+        try:
+            from password import password
+            self.msg('nickserv', 'identify ' + password)
+            print("[*] info: requested nick " + settings.nickname)
+        except ImportError:
+            pass
 
     def userJoined(self, user, channel):
         """Called when user joins a channel"""
