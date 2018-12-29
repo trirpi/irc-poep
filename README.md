@@ -1,7 +1,7 @@
 # Poep
 
-Poep is a very cool IRC bot.
-Made with <3 by trirpi
+Poep is a very cool IRC bot. Although mostly friendly he has some quirks. Especially the 'dis' command can be considered NSFW.
+Made with <3 by trirpi.
 
 ## Synopsis
 
